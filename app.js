@@ -1,4 +1,4 @@
-import { OST_TRACKS, HERO_DECK } from './ost-tracks.js';
+import { OST_TRACKS, HERO_DECK } from './ost-tracks.js?v=20261124c';
 
 if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
   import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js').catch(() => {});

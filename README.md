@@ -32,4 +32,4 @@ Then open `http://localhost:4173/`.
 
 - Zero secrets, tokens, `.env` files, or internal company source code are present in this repository.
 - `resume/Rolando_Huerta_Resume_2026_Master.pdf` intentionally includes your San Antonio location, email (`rolando.t.huerta@gmail.com`), and phone number `(361) 406-9089` as supplied in the PDF. Confirm you want those public before pushing.
-- Credential qualifiers follow the 2026 résumé: Brown University B.A. (2007–2011), University of Oxford Executive Diploma (coursework completed; formal diploma conferral pending), and University of San Diego MBA / M.S. (admitted; coursework undertaken; deferred).
+- Credential qualifiers follow the 2026 résumé: Brown University B.A. (2007–2011), University of Oxford Executive Diploma (admitted; deferred due to Family Medical Leave), and University of San Diego MBA / M.S. (admitted; deferred due to Family Medical Leave).
