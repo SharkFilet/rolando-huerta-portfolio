@@ -50,7 +50,13 @@
       outline-offset: 3px;
     }
 
-    .dark-top :where(a:any-link, button):focus-visible {
+    .dark-surface {
+      color-scheme: dark;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .dark-surface :where(a:any-link, button):focus-visible {
       outline-color: var(--mint-ink);
     }
 
@@ -61,8 +67,6 @@
     }
 
     .dark-top {
-      background: var(--ink);
-      color: var(--paper);
       border-bottom: 5px solid var(--orange);
     }
 
@@ -279,13 +283,90 @@
 
     .footer {
       border-top: 1px solid var(--line);
-      padding: 26px 0 56px;
+      padding: 26px 0 110px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
       font-size: 0.9rem;
       color: var(--muted);
+    }
+
+    /* Always-Visible Persistent Mini-Player Dock */
+    .mini-player {
+      position: fixed;
+      inset-block-end: 18px;
+      inset-inline-end: 18px;
+      z-index: 45;
+      width: min(calc(100vw - 36px), 410px);
+      border: 1px solid var(--mint-ink);
+      box-shadow: 8px 8px 0 var(--orange);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mini-player.is-collapsed {
+      width: auto;
+      max-width: min(calc(100vw - 36px), 270px);
+    }
+
+    .mini-player.is-collapsed #mini-prev-btn,
+    .mini-player.is-collapsed #mini-next-btn,
+    .mini-player.is-collapsed .mini-jump {
+      display: none;
+    }
+
+    .mini-meta {
+      min-width: 0;
+    }
+
+    .mini-meta .mono {
+      font-size: 10px;
+      color: var(--mint-ink);
+    }
+
+    .mini-player.is-playing .mini-meta .mono {
+      color: var(--orange);
+    }
+
+    .mini-meta strong {
+      display: block;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mini-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .mini-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-block-size: 36px;
+      min-inline-size: 36px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgb(164 217 206 / 0.35);
+      background: rgb(255 255 255 / 0.06);
+      color: var(--paper);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mini-btn:hover {
+      background: var(--orange);
+      border-color: var(--orange);
     }
 
     @media (max-width: 740px) {
@@ -311,8 +392,9 @@
       }
       .nav,
       .actions,
-      .footer {
-        display: none;
+      .footer,
+      .mini-player {
+        display: none !important;
       }
       .job,
       .card {
@@ -320,14 +402,15 @@
       }
     }
   </style>
+  <script type="module" src="../app.js"></script>
   <script type="module">
     document.getElementById('print-resume-btn')?.addEventListener('click', () => {
       window.print();
     });
   </script>
 </head>
-<body>
-  <header class="dark-top">
+<body data-base="../">
+  <header class="dark-top dark-surface">
     <div class="wrap">
       <nav class="nav" aria-label="Résumé navigation">
         <a class="wordmark" href="../">RH<span class="tag">.</span> / Portfolio</a>
@@ -354,7 +437,7 @@
         <div class="actions">
           <a class="button" href="./Rolando_Huerta_Resume_2026_Master.pdf" download>Download 2026 PDF ↓</a>
           <button type="button" class="button secondary" id="print-resume-btn">Print / Save Page</button>
-          <a class="button secondary" href="../#soundtrack">Listen: Retro 16-Bit OST ♫</a>
+          <a class="button secondary" href="../#soundtrack">Open Full OST Console ♫</a>
         </div>
       </div>
     </div>
@@ -522,5 +605,21 @@
       <span><a href="../">Portfolio Home</a> · <a href="mailto:rolando.t.huerta@gmail.com">Contact</a> · <a href="https://github.com/SharkFilet" target="_blank" rel="noopener noreferrer">GitHub</a></span>
     </footer>
   </div>
+
+  <audio id="ost-audio" preload="metadata" aria-label="Star Keep Retro 16-Bit OST audio stream"></audio>
+
+  <aside id="mini-player" class="mini-player dark-surface" aria-label="Persistent Star Keep OST mini-player">
+    <div class="mini-meta">
+      <div class="mono" id="mini-status-label">Vol. 1 · Autostart Ready</div>
+      <strong id="mini-track-title">01. Star Keep Title (8-Bit Overture)</strong>
+    </div>
+    <div class="mini-controls">
+      <button type="button" class="mini-btn" id="mini-prev-btn" aria-label="Previous track">⏮</button>
+      <button type="button" class="mini-btn" id="mini-play-btn" aria-label="Play soundtrack">▶</button>
+      <button type="button" class="mini-btn" id="mini-next-btn" aria-label="Next track">⏭</button>
+      <a class="mini-btn mini-jump" href="../#soundtrack" aria-label="Open full OST console">↑</a>
+      <button type="button" class="mini-btn" id="mini-collapse-btn" aria-expanded="true" aria-label="Minimize mini-player">—</button>
+    </div>
+  </aside>
 </body>
 </html>

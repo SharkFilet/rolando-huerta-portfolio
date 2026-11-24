@@ -26,6 +26,12 @@ html {
   html {
     scroll-behavior: auto;
   }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 body {
@@ -57,7 +63,13 @@ input {
   outline-offset: 3px;
 }
 
-.dark-surface :where(a:any-link, button, input):focus-visible,
+.dark-surface {
+  color-scheme: dark;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.dark-surface :where(a:any-link, button, summary, input):focus-visible,
 dialog.dark-surface :where(a:any-link, button, input):focus-visible {
   outline-color: var(--mint-ink);
 }
@@ -115,9 +127,9 @@ dialog.dark-surface :where(a:any-link, button, input):focus-visible {
   position: sticky;
   inset-block-start: 0;
   z-index: 40;
-  background: rgb(245 240 232 / 0.92);
+  background: rgb(245 240 232 / 0.94);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgb(217 215 207 / 0.7);
+  border-bottom: 1px solid rgb(217 215 207 / 0.75);
 }
 
 .header-inner {
@@ -125,7 +137,7 @@ dialog.dark-surface :where(a:any-link, button, input):focus-visible {
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  padding-block: 16px;
+  padding-block: 14px;
 }
 
 .header-inner > * {
@@ -413,8 +425,6 @@ h1 {
 }
 
 .hero-card {
-  background: var(--ink);
-  color: var(--paper);
   padding: 28px;
   border-radius: 2px;
   transform: rotate(2deg);
@@ -488,13 +498,13 @@ h1 {
 
 /* Sections */
 section {
-  padding: 92px 0;
+  padding: 88px 0;
   border-top: 1px solid var(--line);
 }
 
 section[id],
 div[id] {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 86px;
 }
 
 .section-head {
@@ -502,7 +512,7 @@ div[id] {
   justify-content: space-between;
   align-items: flex-end;
   gap: 30px;
-  margin-bottom: 44px;
+  margin-bottom: 42px;
 }
 
 h2 {
@@ -732,6 +742,13 @@ h2 {
   gap: 18px;
 }
 
+.showcase-media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
 .showcase-card {
   display: flex;
   flex-direction: column;
@@ -748,19 +765,75 @@ h2 {
 
 @media (prefers-reduced-motion: no-preference) {
   .showcase-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
   }
 }
 
-.showcase-card img {
+.showcase-card > img {
   width: 100%;
   aspect-ratio: 1.35;
   object-fit: cover;
   display: block;
 }
 
-.showcase-card.feature img {
+.showcase-card.feature > img {
   aspect-ratio: 1.75;
+}
+
+.showcase-card.media-wide > img {
+  aspect-ratio: 16 / 9;
+}
+
+.yt-facade {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0d1b22;
+  overflow: hidden;
+}
+
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.yt-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: rgb(17 35 42 / 0.35);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.yt-play-overlay:hover {
+  background: rgb(17 35 42 / 0.18);
+}
+
+.yt-play-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--orange);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+.yt-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .showcase-copy {
@@ -808,8 +881,8 @@ h2 {
 .showcase-btn {
   display: inline-flex;
   align-items: center;
-  min-block-size: 34px;
-  padding: 6px 12px;
+  min-block-size: 36px;
+  padding: 6px 13px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--ink);
   background: var(--cream);
@@ -825,12 +898,72 @@ h2 {
   color: var(--paper);
 }
 
+/* Prominent YouTube Channels Band */
+.youtube-band {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-mint);
+}
+
+.youtube-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.youtube-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.yt-channel-card {
+  background: var(--paper);
+  border: 1px solid var(--line-mint);
+  padding: 18px 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.yt-channel-card:hover {
+  box-shadow: 6px 6px 0 var(--teal);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .yt-channel-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.yt-channel-card strong {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.yt-channel-card p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.yt-channel-card .showcase-link {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
 .link-ribbon {
   display: flex;
   align-items: center;
   gap: 18px 24px;
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: 24px;
   padding-top: 20px;
   border-top: 1px solid var(--line-mint);
 }
@@ -847,23 +980,26 @@ h2 {
   text-decoration: underline;
 }
 
-/* Star Keep Retro 16-Bit OST Player */
+/* Star Keep Retro 16-Bit OST Player — Top Deck + Bottom Song List */
 .ost-console {
-  background: var(--ink);
-  color: var(--paper);
   border: 1px solid var(--ink);
   box-shadow: 12px 12px 0 var(--teal);
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
   overflow: hidden;
 }
 
 .ost-deck {
   padding: 28px;
+  display: grid;
+  grid-template-columns: minmax(270px, 0.9fr) 1.15fr;
+  gap: 28px;
+  align-items: center;
+  border-bottom: 1px solid rgb(164 217 206 / 0.22);
+}
+
+.ost-deck-media {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  border-right: 1px solid rgb(164 217 206 / 0.18);
+  gap: 12px;
 }
 
 .ost-cover-frame {
@@ -894,9 +1030,16 @@ h2 {
   text-transform: uppercase;
 }
 
+.ost-deck-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
 .ost-now-playing h3 {
-  margin: 6px 0 4px;
-  font-size: 25px;
+  margin: 4px 0;
+  font-size: clamp(22px, 2.8vw, 28px);
   line-height: 1.15;
   letter-spacing: -0.04em;
   color: var(--paper);
@@ -910,7 +1053,7 @@ h2 {
 
 .ost-visualizer {
   width: 100%;
-  height: 54px;
+  height: 56px;
   display: block;
   background: #0b181d;
   border: 1px solid rgb(164 217 206 / 0.2);
@@ -982,8 +1125,9 @@ h2 {
 .ost-volume-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-top: 8px;
   border-top: 1px solid rgb(164 217 206 / 0.16);
 }
@@ -993,7 +1137,8 @@ h2 {
   align-items: center;
   gap: 8px;
   flex: 1;
-  max-width: 220px;
+  min-width: 180px;
+  max-width: 240px;
 }
 
 .ost-notes summary {
@@ -1016,21 +1161,22 @@ h2 {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  background: #0d1c22;
 }
 
 .ost-filter-bar {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   overflow-x: auto;
-  padding: 14px 18px 0;
+  padding: 10px 24px 0;
   border-bottom: 1px solid rgb(164 217 206 / 0.18);
 }
 
 .ost-filter-bar [role="tab"] {
   flex: none;
   position: relative;
-  min-block-size: 42px;
+  min-block-size: 44px;
   padding: 8px 12px 12px;
   border: 0;
   background: transparent;
@@ -1056,8 +1202,11 @@ h2 {
 .ost-tracklist {
   list-style: none;
   margin: 0;
-  padding: 8px 14px 16px;
-  max-height: 465px;
+  padding: 14px 24px 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 20px;
+  max-height: 410px;
   overflow-y: auto;
 }
 
@@ -1071,11 +1220,11 @@ h2 {
 
 .ost-track-trigger {
   display: grid;
-  grid-template-columns: 36px 1fr auto;
+  grid-template-columns: 52px 1fr auto;
   align-items: center;
   gap: 10px;
   width: 100%;
-  min-block-size: 46px;
+  min-block-size: 48px;
   padding: 8px 10px;
   border: 0;
   background: transparent;
@@ -1089,12 +1238,12 @@ h2 {
 }
 
 .ost-track-row.is-active .ost-track-trigger {
-  background: rgb(14 119 119 / 0.45);
+  background: rgb(14 119 119 / 0.5);
 }
 
 .ost-track-num {
   font-family: "DM Mono", monospace;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--mint-ink);
 }
 
@@ -1115,6 +1264,9 @@ h2 {
   display: block;
   font-size: 12px;
   color: #a9c0bf;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ost-track-stamp {
@@ -1241,9 +1393,121 @@ h2 {
   margin-bottom: 24px;
 }
 
+/* Embedded Seamless Résumé View */
+.resume-banner {
+  padding: 46px 36px;
+  border: 1px solid var(--ink);
+  border-bottom: 5px solid var(--orange);
+  margin-top: 28px;
+}
+
+.resume-banner h1 {
+  font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+  margin: 12px 0 10px;
+  letter-spacing: -0.05em;
+}
+
+.resume-subhead {
+  font-size: 1.12rem;
+  color: #dce9e8;
+  margin: 0 0 8px;
+}
+
+.resume-meta {
+  font-size: 0.95rem;
+  color: #b7cdcc;
+  margin: 0 0 24px;
+}
+
+.resume-meta a {
+  color: var(--mint-ink);
+}
+
+.resume-banner .button {
+  border-color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.resume-banner .button.secondary {
+  background: transparent;
+  border-color: rgb(164 217 206 / 0.55);
+  color: var(--paper);
+}
+
+.resume-banner .button.secondary:hover {
+  background: rgb(164 217 206 / 0.16);
+}
+
+.resume-section {
+  padding: 42px 0 0;
+  border-top: 0;
+}
+
+.resume-section h2 {
+  font-size: 1.55rem;
+  letter-spacing: -0.03em;
+  max-width: none;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.resume-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.resume-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+}
+
+.resume-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.resume-job {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+
+.resume-job h3 {
+  margin: 0 0 4px;
+  font-size: 1.12rem;
+}
+
+.job-meta {
+  font-size: 0.92rem;
+  color: var(--teal);
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.resume-job ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.resume-job li + li {
+  margin-top: 8px;
+}
+
+.resume-callout {
+  background: var(--mint);
+  border-left: 4px solid var(--teal);
+  padding: 18px 22px;
+  margin-top: 28px;
+}
+
 /* Footer */
 footer {
-  padding: 34px 0 72px;
+  padding: 34px 0 112px;
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
@@ -1260,7 +1524,7 @@ footer a {
 /* Native Modal Dialogs */
 dialog.portfolio-dialog {
   margin: auto;
-  width: min(92vw, 680px);
+  width: min(92vw, 720px);
   max-height: 88dvh;
   padding: 0;
   border: 1px solid var(--ink);
@@ -1343,15 +1607,13 @@ dialog.portfolio-dialog::backdrop {
   color: var(--paper);
 }
 
-/* Floating Mini-Player Dock */
+/* Always-Visible Persistent Floating Mini-Player Dock */
 .mini-player {
   position: fixed;
   inset-block-end: 18px;
   inset-inline-end: 18px;
   z-index: 45;
-  width: min(calc(100vw - 36px), 370px);
-  background: var(--ink);
-  color: var(--paper);
+  width: min(calc(100vw - 36px), 410px);
   border: 1px solid var(--mint-ink);
   box-shadow: 8px 8px 0 var(--orange);
   padding: 12px 14px;
@@ -1361,7 +1623,14 @@ dialog.portfolio-dialog::backdrop {
   gap: 12px;
 }
 
-.mini-player[hidden] {
+.mini-player.is-collapsed {
+  width: auto;
+  max-width: min(calc(100vw - 36px), 270px);
+}
+
+.mini-player.is-collapsed #mini-prev-btn,
+.mini-player.is-collapsed #mini-next-btn,
+.mini-player.is-collapsed .mini-jump {
   display: none;
 }
 
@@ -1372,6 +1641,10 @@ dialog.portfolio-dialog::backdrop {
 .mini-meta .mono {
   font-size: 10px;
   color: var(--mint-ink);
+}
+
+.mini-player.is-playing .mini-meta .mono {
+  color: var(--orange);
 }
 
 .mini-meta strong {
@@ -1390,6 +1663,9 @@ dialog.portfolio-dialog::backdrop {
 }
 
 .mini-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-block-size: 36px;
   min-inline-size: 36px;
   padding: 4px 10px;
@@ -1399,6 +1675,7 @@ dialog.portfolio-dialog::backdrop {
   color: var(--paper);
   font-family: "DM Mono", monospace;
   font-size: 11px;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -1409,13 +1686,18 @@ dialog.portfolio-dialog::backdrop {
 
 /* Responsive Breakpoints */
 @media (max-width: 900px) {
-  .ost-console {
+  .ost-deck {
     grid-template-columns: 1fr;
   }
 
-  .ost-deck {
-    border-right: 0;
-    border-bottom: 1px solid rgb(164 217 206 / 0.18);
+  .ost-tracklist {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase-media-grid,
+  .youtube-grid,
+  .resume-grid-2 {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1473,5 +1755,20 @@ dialog.portfolio-dialog::backdrop {
 
   .quote {
     padding: 36px 24px;
+  }
+}
+
+@media print {
+  .site-header,
+  .mini-player,
+  #portfolio-view {
+    display: none !important;
+  }
+  #resume-view[hidden] {
+    display: block !important;
+  }
+  .resume-banner {
+    background: #fff !important;
+    color: #000 !important;
   }
 }

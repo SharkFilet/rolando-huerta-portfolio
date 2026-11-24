@@ -1,0 +1,344 @@
+:root {
+  color-scheme: dark;
+  --ink: #f1ebe0;
+  --muted: #a9b8c4;
+  --cream: #0a1017;
+  --paper: #111924;
+  --teal: #36c4bc;
+  --teal-deep: #5ed7cf;
+  --mint: #0e1620;
+  --mint-ink: #d8a45c;
+  --orange: #d8a45c;
+  --line: rgb(216 164 92 / 0.24);
+  --line-mint: rgb(54 196 188 / 0.28);
+}
+
+body {
+  background:
+    radial-gradient(circle at 85% 8%, rgb(54 196 188 / 0.1), transparent 36%),
+    radial-gradient(circle at 14% 22%, rgb(216 164 92 / 0.08), transparent 40%),
+    var(--cream);
+  color: var(--ink);
+}
+
+.mockup-ribbon {
+  background: #161f2c;
+  color: var(--ink);
+  border-bottom: 1px solid rgb(216 164 92 / 0.4);
+  padding: 10px 28px;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mockup-ribbon a {
+  color: #d8a45c;
+  font-weight: 700;
+}
+
+.site-header {
+  background: rgb(10 16 23 / 0.9);
+  border-bottom: 1px solid rgb(216 164 92 / 0.25);
+}
+
+.site-menu {
+  background: #111924;
+  border-color: #d8a45c;
+  box-shadow: 8px 8px 0 rgb(54 196 188 / 0.35);
+}
+
+.site-menu a {
+  color: var(--ink);
+}
+
+.site-header.is-wide .site-menu a {
+  color: var(--muted);
+}
+
+.site-header.is-wide .site-menu a:hover,
+.site-header.is-wide .site-menu a[aria-current="true"],
+.site-header.is-wide .site-menu a[aria-current="page"] {
+  color: #f7f1e6;
+}
+
+.nav-ost-pill,
+.menu-button {
+  background: #141f2d;
+  border-color: rgb(216 164 92 / 0.55);
+  color: var(--ink);
+}
+
+.nav-ost-pill:hover {
+  background: #d8a45c;
+  color: #0a1017;
+}
+
+.nav-ost-pill.is-playing {
+  background: #1d6460;
+  border-color: #36c4bc;
+  color: #fff;
+}
+
+h1,
+h2 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.hero-lead {
+  color: #c2ced8;
+}
+
+.button {
+  border-color: rgb(216 164 92 / 0.55);
+  color: var(--ink);
+}
+
+.button:hover {
+  background: rgb(216 164 92 / 0.14);
+}
+
+.button.primary {
+  background: #d8a45c;
+  border-color: #d8a45c;
+  color: #0a1017;
+}
+
+.button.primary:hover {
+  background: #e7b978;
+}
+
+.button.accent {
+  background: #1d706c;
+  border-color: #36c4bc;
+  color: #effaf8;
+}
+
+.button.coral {
+  background: #b97c36;
+  border-color: #d8a45c;
+  color: #fff;
+}
+
+.dark-surface {
+  color-scheme: dark;
+  background: #0d1520;
+  color: #f1ebe0;
+}
+
+.hero-card {
+  background: linear-gradient(155deg, #152130 0%, #0d1520 100%);
+  border: 1px solid rgb(216 164 92 / 0.5);
+  box-shadow: 12px 12px 0 rgb(216 164 92 / 0.25);
+  transform: rotate(1deg);
+  color: #f1ebe0;
+}
+
+.hero-card .mono {
+  color: #d8a45c;
+}
+
+.hero-card .number {
+  color: #d8a45c;
+}
+
+.hero-card h2 {
+  color: #f7f1e6;
+}
+
+.hero-card p {
+  color: #c2ced8;
+}
+
+.profile-photo {
+  border: 2px solid #d8a45c;
+  box-shadow: 0 0 0 10px #111924, 0 18px 40px rgb(0 0 0 / 0.5);
+  background: #111924;
+}
+
+.roadmap-link:hover {
+  background: #172332;
+}
+
+.showcase {
+  background: #0e1620;
+  border-top: 1px solid rgb(216 164 92 / 0.25);
+  border-bottom: 1px solid rgb(216 164 92 / 0.25);
+}
+
+.showcase-card,
+.yt-channel-card,
+.card,
+.vault-card,
+.competency-deck,
+.roadmap-list {
+  background: #121c28;
+  border-color: rgb(216 164 92 / 0.26);
+}
+
+.showcase-card:hover {
+  box-shadow: 8px 8px 0 #d8a45c;
+}
+
+.showcase-btn {
+  background: #172434;
+  border-color: rgb(216 164 92 / 0.45);
+  color: var(--ink);
+}
+
+.showcase-btn:hover {
+  background: #d8a45c;
+  color: #0a1017;
+}
+
+.ost-console {
+  background: #0c141e;
+  border-color: rgb(216 164 92 / 0.45);
+  box-shadow: 12px 12px 0 rgb(54 196 188 / 0.28);
+  color: #f1ebe0;
+}
+
+.ost-playlist-pane {
+  background: #091018;
+}
+
+.ost-now-playing .mono {
+  color: #d8a45c;
+}
+
+.ost-now-playing h3 {
+  color: #f7f1e6;
+}
+
+.ost-now-playing p {
+  color: #b9c6d1;
+}
+
+.ost-btn {
+  color: #f1ebe0;
+  border-color: rgb(216 164 92 / 0.35);
+}
+
+.ost-btn.play-main {
+  background: #d8a45c;
+  border-color: #d8a45c;
+  color: #0a1017;
+}
+
+.ost-btn.play-main:hover {
+  background: #e9bb7a;
+}
+
+.ost-track-trigger {
+  color: #f1ebe0;
+}
+
+.ost-track-title {
+  color: #f7f1e6;
+}
+
+.ost-track-sub,
+.ost-track-stamp {
+  color: #a9b8c4;
+}
+
+.ost-track-row.is-active .ost-track-trigger {
+  background: rgb(54 196 188 / 0.18);
+}
+
+.ost-badge {
+  background: rgb(10 16 23 / 0.88);
+  color: #d8a45c;
+  border-color: rgb(216 164 92 / 0.45);
+}
+
+.quote {
+  background: linear-gradient(135deg, #132c33 0%, #0f1b26 100%);
+  border: 1px solid rgb(216 164 92 / 0.4);
+  color: #f4efe4;
+}
+
+.mini-player {
+  background: #0f1823;
+  color: #f1ebe0;
+  border-color: #d8a45c;
+  box-shadow: 8px 8px 0 rgb(54 196 188 / 0.3);
+}
+
+.mini-meta strong {
+  color: #f7f1e6;
+}
+
+.mini-btn {
+  color: #f1ebe0;
+  border-color: rgb(216 164 92 / 0.35);
+}
+
+dialog.portfolio-dialog {
+  background: #111924;
+  color: var(--ink);
+  border-color: #d8a45c;
+  box-shadow: 12px 12px 0 rgb(54 196 188 / 0.35);
+}
+
+.dialog-head {
+  background: #162231;
+}
+
+.dialog-close {
+  background: #0c141e;
+  border-color: #d8a45c;
+  color: var(--ink);
+}
+
+.dialog-close:hover {
+  background: #d8a45c;
+  color: #0a1017;
+}
+
+.pill-cloud li {
+  background: #182534;
+  border-color: rgb(54 196 188 / 0.32);
+  color: var(--ink);
+}
+
+.resume-banner {
+  background: linear-gradient(155deg, #152130 0%, #0d1520 100%);
+  border-color: rgb(216 164 92 / 0.4);
+  border-bottom-color: #d8a45c;
+  color: #f1ebe0;
+}
+
+.resume-banner .button.primary {
+  background: #d8a45c;
+  border-color: #d8a45c;
+  color: #0a1017;
+}
+
+.resume-banner .button:not(.primary) {
+  background: transparent;
+  border-color: rgb(216 164 92 / 0.55);
+  color: #f1ebe0;
+}
+
+.resume-banner .button:not(.primary):hover {
+  background: rgb(216 164 92 / 0.16);
+}
+
+.resume-card,
+.resume-job {
+  background: #121c28;
+  border-color: rgb(216 164 92 / 0.25);
+}
+
+.resume-callout {
+  background: #14262c;
+  border-left-color: #d8a45c;
+}

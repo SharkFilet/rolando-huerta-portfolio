@@ -1,174 +1,36 @@
+import { OST_TRACKS, HERO_DECK } from './ost-tracks.js';
+
 if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
   import('https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js').catch(() => {});
 }
 
-const TRACKS = [
-  {
-    num: '01',
-    title: 'Star Keep Title (8-Bit Overture)',
-    chapter: 'Overture · Main Title Theme',
-    mood: 'adventure',
-    stamp: '00:00',
-    file: 'assets/audio/01-star-keep-title.m4a',
-  },
-  {
-    num: '02',
-    title: 'Skybound Academy Over Verdantis',
-    chapter: 'Verdantis · Floating Citadel',
-    mood: 'adventure',
-    stamp: '01:15',
-    file: 'assets/audio/02-skybound-academy-over-verdantis.m4a',
-  },
-  {
-    num: '03',
-    title: "Zo's Wobbly Hover Lesson",
-    chapter: 'Training · Wing-Rig Flight',
-    mood: 'adventure',
-    stamp: '02:32',
-    file: 'assets/audio/03-zos-wobbly-hover-lesson.m4a',
-  },
-  {
-    num: '04',
-    title: "Tali's Graceful Landing",
-    chapter: 'Chapter 3 · Solmas Aeronaut',
-    mood: 'adventure',
-    stamp: '03:41',
-    file: 'assets/audio/04-talis-graceful-landing.m4a',
-  },
-  {
-    num: '05',
-    title: 'Glyph Hall Reverie',
-    chapter: 'Verdantis · Crystal Sanctuary',
-    mood: 'lofi',
-    stamp: '05:06',
-    file: 'assets/audio/05-glyph-hall-reverie.m4a',
-  },
-  {
-    num: '06',
-    title: 'Null Skirmish! (Battle Theme)',
-    chapter: 'Combat · Academy Encounter',
-    mood: 'battle',
-    stamp: '06:39',
-    file: 'assets/audio/06-null-skirmish-battle.m4a',
-  },
-  {
-    num: '07',
-    title: 'The Vault Knows You',
-    chapter: 'Archive · Substrate Memory',
-    mood: 'lofi',
-    stamp: '07:46',
-    file: 'assets/audio/07-the-vault-knows-you.m4a',
-  },
-  {
-    num: '08',
-    title: 'Path to the Arcanum',
-    chapter: 'Chapter 11 · Dawn Departure',
-    mood: 'adventure',
-    stamp: '09:08',
-    file: 'assets/audio/08-path-to-the-arcanum.m4a',
-  },
-  {
-    num: '09',
-    title: 'Meditating Beneath the Orb',
-    chapter: 'Verdantis · Resonance Choice',
-    mood: 'lofi',
-    stamp: '10:19',
-    file: 'assets/audio/09-meditating-beneath-the-orb.m4a',
-  },
-  {
-    num: '10',
-    title: "Captain Kael's March",
-    chapter: 'Seventh Fleet · Command Tempo',
-    mood: 'battle',
-    stamp: '11:49',
-    file: 'assets/audio/10-captain-kaels-march.m4a',
-  },
-  {
-    num: '11',
-    title: 'A Melody in Static',
-    chapter: 'Signal · Deep Space Drift',
-    mood: 'lofi',
-    stamp: '12:54',
-    file: 'assets/audio/11-a-melody-in-static.m4a',
-  },
-  {
-    num: '12',
-    title: 'The Ark Buried Beneath',
-    chapter: 'Caldran IV · Ancient Core',
-    mood: 'lofi',
-    stamp: '14:17',
-    file: 'assets/audio/12-the-ark-buried-beneath.m4a',
-  },
-  {
-    num: '13',
-    title: 'Last Night on Nyx',
-    chapter: 'Nocturne · Orbital Quiet',
-    mood: 'lofi',
-    stamp: '15:52',
-    file: 'assets/audio/13-last-night-on-nyx.m4a',
-  },
-  {
-    num: '14',
-    title: 'Battle of Baal (Boss Showdown)',
-    chapter: 'Chapter 13 · Boss Theme',
-    mood: 'battle',
-    stamp: '17:23',
-    file: 'assets/audio/14-battle-of-baal-boss.m4a',
-  },
-  {
-    num: '15',
-    title: 'Fragments in the Golden Stream',
-    chapter: 'EP Title · Concept Suite',
-    mood: 'adventure',
-    stamp: '18:27',
-    file: 'assets/audio/15-fragments-in-the-golden-stream.m4a',
-  },
-  {
-    num: '16',
-    title: 'Golden Age Dawns (Credits & Starlight)',
-    chapter: 'Finale · Credits Roll',
-    mood: 'adventure',
-    stamp: '19:42',
-    file: 'assets/audio/16-golden-age-dawns.m4a',
-  },
-  {
-    num: '17',
-    title: 'Orbital Horizon (Cosmic Modular Bonus Track)',
-    chapter: 'Bonus · Extended Modular Cut',
-    mood: 'lofi',
-    stamp: '20:58',
-    file: 'assets/audio/17-orbital-horizon-bonus.m4a',
-  },
-];
+const ASSET_BASE = document.body.dataset.base || './';
+const STORAGE_KEY = 'rth_ost_state_v2';
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const HERO_DECK = [
-  {
-    eyebrow: 'Current focus · Venture',
-    number: '01',
-    title: 'SharkFilet, Inc.',
-    copy: 'Delaware C-Corp engineering CreatorOS, EmotiConnect, and SharkCare across React 19, TanStack, Supabase, and Stripe Custom Accounts (546 tests across 94 suites).',
-    linkText: 'Visit sharkfilet.com ↗',
-    linkHref: 'https://sharkfilet.com',
-  },
-  {
-    eyebrow: 'Current focus · Transmedia',
-    number: '02',
-    title: 'Star Keep: The Ark',
-    copy: 'Published sci-fi universe spanning a full-length novel, Webtoon Canvas manga, and a playable 16-bit style RPG Demo built with RPG Maker MZ & Node.js.',
-    linkText: 'Play RPG on Itch.io ↗',
-    linkHref: 'https://sharkfilet.itch.io/star-keep-the-ark',
-  },
-  {
-    eyebrow: 'Current focus · Soundtrack',
-    number: '03',
-    title: 'Retro 16-Bit OST',
-    copy: '17 original SNES/GBA-inspired chiptune and cosmic lo-fi tracks crafted from scratch in BeepBox. Stream every cue or download tracks right below.',
-    linkText: 'Jump to OST Console ↓',
-    linkHref: '#soundtrack',
-  },
-];
+function assetUrl(relPath) {
+  return new URL(relPath, new URL(ASSET_BASE, window.location.href)).href;
+}
 
-function initNavbar() {
+function readAudioState() {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeAudioState(patch) {
+  try {
+    const current = readAudioState();
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...patch }));
+  } catch {
+    // Ignore storage quota or private-mode restrictions
+  }
+}
+
+function initNavbar(onViewNavigate) {
   const header = document.querySelector('.site-header');
   const inner = header?.querySelector('.header-inner');
   const menu = document.getElementById('site-menu');
@@ -200,7 +62,7 @@ function initNavbar() {
         try {
           menu.showPopover();
         } catch {
-          // Ignore if popover state already changed
+          // Ignore if popover state changed
         }
       }
     }
@@ -223,16 +85,21 @@ function initNavbar() {
 
   menu.addEventListener('click', (event) => {
     const link = event.target.closest('a');
-    if (link && !header.classList.contains('is-wide') && typeof menu.hidePopover === 'function') {
+    if (!link) return;
+    if (!header.classList.contains('is-wide') && typeof menu.hidePopover === 'function') {
       try {
         menu.hidePopover();
       } catch {
         // Ignore if already closed
       }
     }
+    if (link.dataset.view && onViewNavigate) {
+      event.preventDefault();
+      onViewNavigate(link.dataset.view, link.dataset.scrollTarget || null);
+    }
   });
 
-  // Scroll spy for section links
+  // Scroll spy for portfolio sections
   const sectionLinks = [...menu.querySelectorAll('a[href^="#"]')];
   const targets = sectionLinks
     .map((a) => ({ link: a, target: document.querySelector(a.getAttribute('href')) }))
@@ -241,6 +108,7 @@ function initNavbar() {
   if (targets.length && 'IntersectionObserver' in window) {
     const spy = new IntersectionObserver(
       (entries) => {
+        if (document.body.dataset.activeView === 'resume') return;
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           for (const item of targets) {
@@ -252,7 +120,7 @@ function initNavbar() {
           }
         }
       },
-      { rootMargin: '-35% 0px -55% 0px' },
+      { rootMargin: '-30% 0px -60% 0px' },
     );
 
     for (const item of targets) {
@@ -261,7 +129,112 @@ function initNavbar() {
   }
 }
 
-function initHeroDeck() {
+function initViewSwitcher() {
+  const portfolioView = document.getElementById('portfolio-view');
+  const resumeView = document.getElementById('resume-view');
+  if (!portfolioView || !resumeView) return null;
+
+  const setActiveNavForView = (viewName) => {
+    for (const link of document.querySelectorAll('#site-menu a')) {
+      if (viewName === 'resume') {
+        if (link.dataset.view === 'resume') {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      } else if (link.dataset.view === 'resume') {
+        link.removeAttribute('aria-current');
+      }
+    }
+  };
+
+  const applyView = (viewName, scrollTarget = null, pushHistory = true) => {
+    const showResume = viewName === 'resume';
+
+    portfolioView.hidden = showResume;
+    resumeView.hidden = !showResume;
+    document.body.dataset.activeView = showResume ? 'resume' : 'portfolio';
+    setActiveNavForView(viewName);
+
+    if (showResume) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+    } else if (scrollTarget) {
+      const el = document.querySelector(scrollTarget);
+      el?.scrollIntoView({ behavior: 'instant' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+    }
+
+    if (pushHistory) {
+      const nextHash = showResume ? '#resume' : scrollTarget || '#setup';
+      if (window.location.hash !== nextHash) {
+        history.pushState({ view: viewName, scrollTarget }, '', nextHash);
+      }
+    }
+
+    if (showResume) {
+      document.getElementById('resume-heading')?.focus({ preventScroll: true });
+    } else if (scrollTarget) {
+      const targetEl = document.querySelector(scrollTarget);
+      const heading = targetEl?.querySelector('h1, h2') || targetEl;
+      heading?.focus?.({ preventScroll: true });
+    } else {
+      document.getElementById('main-content')?.focus({ preventScroll: true });
+    }
+  };
+
+  // Wire any inline triggers with data-view
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-view]');
+    if (!trigger) return;
+    // Let navbar handler run for #site-menu links to avoid double firing
+    if (trigger.closest('#site-menu')) return;
+    event.preventDefault();
+    applyView(trigger.dataset.view, trigger.dataset.scrollTarget || null, true);
+  });
+
+  // Also allow regular #section links inside mini-player / resume view to jump back to portfolio
+  document.addEventListener('click', (event) => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor || anchor.dataset.view) return;
+    const hash = anchor.getAttribute('href');
+    if (hash === '#resume') {
+      event.preventDefault();
+      applyView('resume', null, true);
+      return;
+    }
+    if (document.body.dataset.activeView === 'resume' && hash.length > 1) {
+      const targetEl = document.querySelector(hash);
+      if (targetEl && portfolioView.contains(targetEl)) {
+        event.preventDefault();
+        applyView('portfolio', hash, true);
+      }
+    }
+  });
+
+  window.addEventListener('popstate', () => {
+    const hash = window.location.hash;
+    if (hash === '#resume') {
+      applyView('resume', null, false);
+    } else {
+      applyView('portfolio', hash && hash !== '#setup' ? hash : null, false);
+    }
+  });
+
+  document.getElementById('inline-print-resume-btn')?.addEventListener('click', () => {
+    window.print();
+  });
+
+  if (window.location.hash === '#resume') {
+    applyView('resume', null, false);
+  }
+
+  return applyView;
+}
+
+function initHeroDeck(onViewNavigate) {
   const eyebrow = document.getElementById('hero-card-eyebrow');
   const number = document.getElementById('hero-card-number');
   const title = document.getElementById('hero-card-title');
@@ -294,6 +267,13 @@ function initHeroDeck() {
   nextBtn.addEventListener('click', () => {
     index = (index + 1) % HERO_DECK.length;
     render();
+  });
+
+  link.addEventListener('click', (event) => {
+    if (link.getAttribute('href') === '#soundtrack' && onViewNavigate) {
+      event.preventDefault();
+      onViewNavigate('portfolio', '#soundtrack');
+    }
   });
 }
 
@@ -350,7 +330,6 @@ function initDialogs() {
     });
   }
 
-  // Fallback light-dismiss for browsers without dialog closedby support (Safari)
   if (!('closedBy' in HTMLDialogElement.prototype)) {
     const isOutside = (event, dialog) => {
       const r = dialog.getBoundingClientRect();
@@ -400,6 +379,25 @@ function initClipboardButtons() {
   });
 }
 
+function initYouTubeFacades(pauseOstCallback) {
+  for (const btn of document.querySelectorAll('[data-yt-embed]')) {
+    btn.addEventListener('click', () => {
+      const container = btn.closest('.yt-facade');
+      const videoId = btn.dataset.ytEmbed;
+      if (!container || !videoId) return;
+      pauseOstCallback?.();
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.title = btn.dataset.ytTitle || 'YouTube Video Player';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'yt-iframe';
+      container.replaceChildren(iframe);
+    });
+  }
+}
+
 function formatClock(seconds) {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
   const mins = Math.floor(seconds / 60);
@@ -407,9 +405,10 @@ function formatClock(seconds) {
   return `${mins}:${String(secs).padStart(2, '0')}`;
 }
 
-function initOstPlayer() {
+function initOstPlayer(onViewNavigate) {
   const audio = document.getElementById('ost-audio');
   const tracklistEl = document.getElementById('ost-tracklist');
+  const coverImg = document.getElementById('ost-cover-img');
   const titleEl = document.getElementById('ost-current-title');
   const chapterEl = document.getElementById('ost-current-chapter');
   const badgeEl = document.getElementById('ost-mood-badge');
@@ -428,32 +427,45 @@ function initOstPlayer() {
   const canvas = document.getElementById('ost-visualizer');
   const navPill = document.getElementById('nav-ost-toggle');
   const heroPlayBtn = document.getElementById('hero-play-ost');
+
+  // Persistent mini-player elements (present on both main site, mockup, and standalone /resume/)
   const miniDock = document.getElementById('mini-player');
+  const miniStatus = document.getElementById('mini-status-label');
   const miniTitle = document.getElementById('mini-track-title');
+  const miniPrevBtn = document.getElementById('mini-prev-btn');
   const miniPlayBtn = document.getElementById('mini-play-btn');
   const miniNextBtn = document.getElementById('mini-next-btn');
-  const miniCloseBtn = document.getElementById('mini-close-btn');
+  const miniCollapseBtn = document.getElementById('mini-collapse-btn');
 
-  if (!audio || !tracklistEl || !titleEl || !playBtn) return;
+  if (!audio) return null;
 
-  let currentIndex = 0;
+  const saved = readAudioState();
+  let currentIndex = Number.isInteger(saved.index) && saved.index >= 0 && saved.index < OST_TRACKS.length ? saved.index : 0;
   let activeFilter = 'all';
   let isShuffle = false;
   let isLoop = false;
-  let hasStartedPlayback = false;
+  let userPaused = Boolean(saved.userPaused);
+  let waitingForGesture = false;
   let audioCtx = null;
   let analyser = null;
   let sourceNode = null;
   let animId = null;
 
-  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (typeof saved.volume === 'number') {
+    audio.volume = Math.min(1, Math.max(0, saved.volume));
+    if (volEl) volEl.value = String(audio.volume);
+  }
+  if (typeof saved.muted === 'boolean') {
+    audio.muted = saved.muted;
+  }
+
   const ctx2d = canvas?.getContext('2d') ?? null;
 
   const drawStaticBars = () => {
     if (!ctx2d || !canvas) return;
     const { width, height } = canvas;
     ctx2d.clearRect(0, 0, width, height);
-    const barCount = 24;
+    const barCount = 28;
     const gap = 4;
     const barW = Math.floor((width - gap * (barCount - 1)) / barCount);
     for (let i = 0; i < barCount; i++) {
@@ -474,7 +486,7 @@ function initOstPlayer() {
 
     const { width, height } = canvas;
     ctx2d.clearRect(0, 0, width, height);
-    const barCount = 24;
+    const barCount = 28;
     const gap = 4;
     const barW = Math.floor((width - gap * (barCount - 1)) / barCount);
 
@@ -516,33 +528,49 @@ function initOstPlayer() {
   };
 
   const getFilteredIndices = () =>
-    TRACKS.map((track, idx) => ({ track, idx }))
-      .filter(({ track }) => activeFilter === 'all' || track.mood === activeFilter)
+    OST_TRACKS.map((track, idx) => ({ track, idx }))
+      .filter(({ track }) => {
+        if (activeFilter === 'all') return true;
+        if (activeFilter === 'vol1') return track.vol === 1;
+        if (activeFilter === 'vol2') return track.vol === 2;
+        return track.mood === activeFilter;
+      })
       .map(({ idx }) => idx);
 
   const syncPlayUI = () => {
     const playing = !audio.paused && Boolean(audio.currentSrc);
-    const label = playing ? 'Pause' : 'Play';
-    playBtn.textContent = playing ? '❚❚ Pause' : '▶ Play';
-    playBtn.setAttribute('aria-label', playing ? 'Pause current track' : 'Play current track');
+    const track = OST_TRACKS[currentIndex];
+    if (playBtn) {
+      playBtn.textContent = playing ? '❚❚ Pause' : '▶ Play';
+      playBtn.setAttribute('aria-label', playing ? 'Pause current track' : 'Play current track');
+    }
     if (miniPlayBtn) {
       miniPlayBtn.textContent = playing ? '❚❚' : '▶';
-      miniPlayBtn.setAttribute('aria-label', label);
+      miniPlayBtn.setAttribute('aria-label', playing ? 'Pause soundtrack' : 'Play soundtrack');
+    }
+    if (miniStatus) {
+      if (playing) {
+        miniStatus.textContent = `Vol. ${track.vol} · Playing`;
+      } else if (waitingForGesture && !userPaused) {
+        miniStatus.textContent = `Vol. ${track.vol} · Click ▶ or tap page`;
+      } else {
+        miniStatus.textContent = `Vol. ${track.vol} · Paused`;
+      }
+    }
+    if (miniDock) {
+      miniDock.classList.toggle('is-playing', playing);
     }
     if (navPill) {
       navPill.classList.toggle('is-playing', playing);
       const pillText = navPill.querySelector('.pill-label');
       if (pillText) {
         pillText.textContent = playing
-          ? `Playing ${TRACKS[currentIndex].num}`
+          ? `V${track.vol}·${track.num} Playing`
           : 'Retro OST';
       }
     }
     if (heroPlayBtn) {
       heroPlayBtn.textContent = playing ? '❚❚ Pause Retro OST' : '▶ Play Retro OST';
-    }
-    if (miniDock && hasStartedPlayback) {
-      miniDock.hidden = false;
     }
     if (playing && !animId && !reducedMotionQuery.matches) {
       animId = requestAnimationFrame(drawVisualizerFrame);
@@ -554,11 +582,12 @@ function initOstPlayer() {
   };
 
   const renderTracklist = () => {
+    if (!tracklistEl) return;
     const visible = getFilteredIndices();
     tracklistEl.innerHTML = '';
 
     for (const idx of visible) {
-      const track = TRACKS[idx];
+      const track = OST_TRACKS[idx];
       const li = document.createElement('li');
       li.className = `ost-track-row${idx === currentIndex ? ' is-active' : ''}`;
 
@@ -567,7 +596,7 @@ function initOstPlayer() {
       btn.className = 'ost-track-trigger';
       btn.setAttribute('aria-current', idx === currentIndex ? 'true' : 'false');
       btn.innerHTML = `
-        <span class="ost-track-num">${track.num}</span>
+        <span class="ost-track-num">V${track.vol}·${track.num}</span>
         <span class="ost-track-meta">
           <span class="ost-track-title"></span>
           <span class="ost-track-sub"></span>
@@ -576,12 +605,16 @@ function initOstPlayer() {
       `;
       btn.querySelector('.ost-track-title').textContent = track.title;
       btn.querySelector('.ost-track-sub').textContent = track.chapter;
-      btn.addEventListener('click', () => loadTrack(idx, true));
+      btn.addEventListener('click', () => {
+        userPaused = false;
+        waitingForGesture = false;
+        loadTrack(idx, true);
+      });
 
       const dl = document.createElement('a');
       dl.className = 'ost-dl-link';
-      dl.href = track.file;
-      dl.download = `${track.num}-${track.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.m4a`;
+      dl.href = assetUrl(track.file);
+      dl.download = `vol${track.vol}-${track.num}-${track.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.m4a`;
       dl.setAttribute('aria-label', `Download ${track.title} audio`);
       dl.textContent = '↓ M4A';
 
@@ -591,58 +624,91 @@ function initOstPlayer() {
   };
 
   const updateNowPlayingMeta = () => {
-    const track = TRACKS[currentIndex];
-    titleEl.textContent = `${track.num}. ${track.title}`;
+    const track = OST_TRACKS[currentIndex];
+    if (titleEl) titleEl.textContent = `V${track.vol} · ${track.num}. ${track.title}`;
     if (chapterEl) chapterEl.textContent = track.chapter;
-    if (badgeEl) badgeEl.textContent = `16-Bit OST · ${track.mood.toUpperCase()}`;
+    if (badgeEl) badgeEl.textContent = `VOL. ${track.vol} · ${track.mood.toUpperCase()}`;
+    if (coverImg) {
+      coverImg.src = assetUrl(track.cover);
+      coverImg.alt =
+        track.vol === 2
+          ? 'Star Keep Volume 2 Cities and Idle 16-Bit Retro OST cover art'
+          : 'Star Keep Volume 1 Retro 16-Bit OST cover art';
+    }
     if (miniTitle) miniTitle.textContent = `${track.num}. ${track.title}`;
     if (dlCurrentEl) {
-      dlCurrentEl.href = track.file;
-      dlCurrentEl.download = `${track.num}-${track.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.m4a`;
+      dlCurrentEl.href = assetUrl(track.file);
+      dlCurrentEl.download = `vol${track.vol}-${track.num}-${track.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.m4a`;
     }
     renderTracklist();
   };
 
-  const loadTrack = async (index, autoplay = false) => {
-    currentIndex = (index + TRACKS.length) % TRACKS.length;
-    const track = TRACKS[currentIndex];
-    const resolved = new URL(track.file, window.location.href).href;
-    if (audio.src !== resolved) {
-      audio.src = track.file;
+  const playAudioSafely = async () => {
+    ensureAudioGraph();
+    if (audioCtx && audioCtx.state === 'suspended') {
+      await audioCtx.resume().catch(() => {});
     }
+    try {
+      await audio.play();
+      waitingForGesture = false;
+      writeAudioState({ index: currentIndex, userPaused: false });
+      syncPlayUI();
+      return true;
+    } catch {
+      waitingForGesture = true;
+      syncPlayUI();
+      return false;
+    }
+  };
+
+  const loadTrack = async (index, autoplay = false, resumeTime = 0) => {
+    currentIndex = (index + OST_TRACKS.length) % OST_TRACKS.length;
+    const track = OST_TRACKS[currentIndex];
+    const resolved = assetUrl(track.file);
+    if (audio.src !== resolved) {
+      audio.src = resolved;
+      if (resumeTime > 0) {
+        audio.addEventListener(
+          'loadedmetadata',
+          () => {
+            if (resumeTime < audio.duration) audio.currentTime = resumeTime;
+          },
+          { once: true },
+        );
+      }
+    }
+    writeAudioState({ index: currentIndex });
     updateNowPlayingMeta();
     if (autoplay) {
-      hasStartedPlayback = true;
-      ensureAudioGraph();
-      if (audioCtx && audioCtx.state === 'suspended') {
-        await audioCtx.resume().catch(() => {});
-      }
-      await audio.play().catch(() => {});
+      await playAudioSafely();
+    } else {
+      syncPlayUI();
     }
-    syncPlayUI();
   };
 
   const togglePlay = async () => {
     if (!audio.currentSrc) {
+      userPaused = false;
       await loadTrack(currentIndex, true);
       return;
     }
     if (audio.paused) {
-      hasStartedPlayback = true;
-      ensureAudioGraph();
-      if (audioCtx && audioCtx.state === 'suspended') {
-        await audioCtx.resume().catch(() => {});
-      }
-      await audio.play().catch(() => {});
+      userPaused = false;
+      await playAudioSafely();
     } else {
+      userPaused = true;
+      waitingForGesture = false;
       audio.pause();
+      writeAudioState({ userPaused: true, time: audio.currentTime });
+      syncPlayUI();
     }
-    syncPlayUI();
   };
 
   const playStep = (direction) => {
+    userPaused = false;
+    waitingForGesture = false;
     const visible = getFilteredIndices();
-    const pool = visible.length ? visible : TRACKS.map((_, i) => i);
+    const pool = visible.length ? visible : OST_TRACKS.map((_, i) => i);
     if (isShuffle && pool.length > 1) {
       const choices = pool.filter((idx) => idx !== currentIndex);
       const pick = choices[Math.floor(Math.random() * choices.length)];
@@ -654,30 +720,29 @@ function initOstPlayer() {
     loadTrack(pool[nextPos], true);
   };
 
-  playBtn.addEventListener('click', togglePlay);
+  playBtn?.addEventListener('click', togglePlay);
   miniPlayBtn?.addEventListener('click', togglePlay);
   prevBtn?.addEventListener('click', () => playStep(-1));
+  miniPrevBtn?.addEventListener('click', () => playStep(-1));
   nextBtn?.addEventListener('click', () => playStep(1));
   miniNextBtn?.addEventListener('click', () => playStep(1));
-
-  heroPlayBtn?.addEventListener('click', () => {
-    togglePlay();
-  });
+  heroPlayBtn?.addEventListener('click', togglePlay);
 
   navPill?.addEventListener('click', () => {
-    if (!hasStartedPlayback) {
-      document.getElementById('soundtrack')?.scrollIntoView({ behavior: reducedMotionQuery.matches ? 'auto' : 'smooth' });
-      togglePlay();
+    if (onViewNavigate && document.body.dataset.activeView === 'resume') {
+      onViewNavigate('portfolio', '#soundtrack');
     } else {
-      togglePlay();
+      document.getElementById('soundtrack')?.scrollIntoView({ behavior: reducedMotionQuery.matches ? 'auto' : 'smooth' });
     }
+    if (audio.paused) togglePlay();
   });
 
-  miniCloseBtn?.addEventListener('click', () => {
-    audio.pause();
-    hasStartedPlayback = false;
-    if (miniDock) miniDock.hidden = true;
-    syncPlayUI();
+  miniCollapseBtn?.addEventListener('click', () => {
+    if (!miniDock) return;
+    const collapsed = miniDock.classList.toggle('is-collapsed');
+    miniCollapseBtn.setAttribute('aria-expanded', String(!collapsed));
+    miniCollapseBtn.textContent = collapsed ? '♫' : '—';
+    miniCollapseBtn.setAttribute('aria-label', collapsed ? 'Expand mini-player' : 'Minimize mini-player');
   });
 
   shuffleBtn?.addEventListener('click', () => {
@@ -694,11 +759,13 @@ function initOstPlayer() {
   volEl?.addEventListener('input', () => {
     audio.volume = Number(volEl.value);
     audio.muted = audio.volume === 0;
+    writeAudioState({ volume: audio.volume, muted: audio.muted });
     if (muteBtn) muteBtn.setAttribute('aria-pressed', String(audio.muted));
   });
 
   muteBtn?.addEventListener('click', () => {
     audio.muted = !audio.muted;
+    writeAudioState({ muted: audio.muted });
     muteBtn.setAttribute('aria-pressed', String(audio.muted));
     muteBtn.textContent = audio.muted ? 'Muted' : 'Mute';
   });
@@ -713,6 +780,9 @@ function initOstPlayer() {
     if (timeCurEl) timeCurEl.textContent = formatClock(audio.currentTime);
     if (seekEl && Number.isFinite(audio.duration) && audio.duration > 0) {
       seekEl.value = String((audio.currentTime / audio.duration) * 100);
+    }
+    if (Math.floor(audio.currentTime) % 2 === 0) {
+      writeAudioState({ time: audio.currentTime });
     }
   });
 
@@ -769,13 +839,41 @@ function initOstPlayer() {
     }
   });
 
-  updateNowPlayingMeta();
+  // First-gesture autostart fallback if browser blocked unmuted autoplay on initial load
+  const handleFirstGesture = (event) => {
+    if (!waitingForGesture || userPaused || !audio.paused) return;
+    // Do not hijack clicks on Pause, Mute, or Video facade buttons
+    if (event.target.closest('#ost-play-btn, #mini-play-btn, #hero-play-ost, #nav-ost-toggle, #ost-mute-btn, [data-yt-embed]')) {
+      return;
+    }
+    waitingForGesture = false;
+    playAudioSafely();
+  };
+
+  document.addEventListener('pointerdown', handleFirstGesture, { capture: true });
+  document.addEventListener('keydown', handleFirstGesture, { capture: true });
+
+  // Initialize player & attempt autostart unless the visitor explicitly paused in this session
+  const startTime = typeof saved.time === 'number' ? saved.time : 0;
+  loadTrack(currentIndex, !userPaused, startTime);
   drawStaticBars();
+
+  return () => {
+    if (!audio.paused) {
+      userPaused = true;
+      waitingForGesture = false;
+      audio.pause();
+      writeAudioState({ userPaused: true, time: audio.currentTime });
+      syncPlayUI();
+    }
+  };
 }
 
-initNavbar();
-initHeroDeck();
+const navigateView = initViewSwitcher();
+initNavbar(navigateView);
+initHeroDeck(navigateView);
 initCompetencyTabs();
 initDialogs();
 initClipboardButtons();
-initOstPlayer();
+const pauseOst = initOstPlayer(navigateView);
+initYouTubeFacades(pauseOst);
