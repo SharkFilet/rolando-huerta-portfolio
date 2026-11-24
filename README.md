@@ -4,14 +4,13 @@ Public static portfolio migrated from `rolando-huerta.open-bread-1630.chatgpt.si
 
 ## Architecture & Hosting Notes
 
-- **100% Static Site:** Pure HTML5, CSS, and vanilla ES module JavaScript (`index.html`, `styles.css`, `app.js`, `ost-tracks.js`, `resume/index.html`, and `mockup/index.html`). No Node/Vite build step, database, server-side functions, or API keys are needed—making it directly compatible with **GitHub Pages** (`actions/deploy-pages@v4`).
+- **100% Static Site:** Pure HTML5, CSS (`styles.css` + `theme-arcanum.css`), and vanilla ES module JavaScript (`index.html`, `app.js`, `ost-tracks.js`, and `resume/index.html`). No Node/Vite build step, database, server-side functions, or API keys are needed—making it directly compatible with **GitHub Pages** (`actions/deploy-pages@v4`).
 - **Relative Paths:** All navigation, image, audio, and PDF links use relative paths so the site renders identically at a root custom domain or at a GitHub Pages project subpath such as `https://sharkfilet.github.io/rolando-huerta-portfolio/`.
 - **Included Media:**
-  - `assets/rolando-huerta.jpeg`, `assets/rolando-huerta-photo.jpg`, and `assets/showcase/*` — original portfolio and showcase graphics, Vol. 1 & Vol. 2 Retro OST covers, SharkFilet walkthrough thumbnail, and Visual Bible cover.
+  - `assets/rolando-huerta-photo.jpg`, `assets/rolando-huerta.jpeg`, and `assets/showcase/*` — suit portrait, showcase graphics, Vol. 1 & Vol. 2 Retro OST covers, SharkFilet walkthrough thumbnail, and Visual Bible cover.
   - `assets/audio/*.m4a` & `assets/audio/vol2/*.m4a` — all 31 tracks across Vol. 1 (17 tracks) and Vol. 2: Cities & Idle (14 tracks) encoded as web-ready AAC `.m4a`, with a persistent always-visible mini-player that keeps streaming uninterrupted when switching to the in-page 2026 Résumé view.
   - `resume/Rolando_Huerta_Resume_2026_Master.pdf` & `resume/index.html` — 2026 Master Résumé PDF and matching interactive HTML résumé view.
   - `assets/downloads/*` — Star Keep 15-slide Visual Bible presentation PDF and Vol. 1 & Vol. 2 soundtrack tracklist sheets.
-  - `mockup/` — Experimental **Arcanum Ledger** obsidian-and-gold theme mockup featuring Rolando's real suit portrait.
 
 ## Local Preview
 

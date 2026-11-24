@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#11232a">
+  <meta name="theme-color" content="#0a1017">
   <meta name="description" content="Rolando Tin Huerta Jr. — Systems Architect, Technical Founder, and Published Author. Full 2026 Master Résumé, technical architecture, experience, publications, and credentials.">
   <title>Résumé | Rolando Tin Huerta Jr.</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      color-scheme: light;
-      --ink: #11232a;
-      --muted: #4d5f66;
-      --cream: #f5f0e8;
-      --paper: #fffdf8;
-      --teal: #0e7777;
-      --mint: #e7f2ee;
-      --mint-ink: #a4d9ce;
-      --orange: #e4683d;
-      --line: #d9d7cf;
+      color-scheme: dark;
+      --ink: #f1ebe0;
+      --muted: #a9b8c4;
+      --cream: #0a1017;
+      --paper: #111924;
+      --teal: #36c4bc;
+      --mint: #0e1620;
+      --mint-ink: #d8a45c;
+      --orange: #d8a45c;
+      --line: rgb(216 164 92 / 0.25);
     }
 
     * {
@@ -52,8 +52,8 @@
 
     .dark-surface {
       color-scheme: dark;
-      background: var(--ink);
-      color: var(--paper);
+      background: linear-gradient(155deg, #152130 0%, #0d1520 100%);
+      color: var(--ink);
     }
 
     .dark-surface :where(a:any-link, button):focus-visible {
@@ -85,7 +85,7 @@
       font-size: 18px;
       letter-spacing: -0.04em;
       text-decoration: none;
-      color: var(--paper);
+      color: var(--ink);
     }
 
     .wordmark .tag {
@@ -112,7 +112,7 @@
     }
 
     .navlinks a:hover {
-      color: var(--paper);
+      color: var(--ink);
       text-decoration: underline;
     }
 
@@ -134,10 +134,16 @@
       margin-bottom: 10px;
     }
 
+    h1,
+    h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+    }
+
     h1 {
       font-size: clamp(2.1rem, 5vw, 3.6rem);
       line-height: 1.04;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.03em;
       margin: 10px 0 12px;
     }
 
@@ -171,9 +177,9 @@
       min-block-size: 44px;
       padding: 10px 20px;
       border-radius: 999px;
-      border: 1px solid var(--paper);
-      background: var(--paper);
-      color: var(--ink);
+      border: 1px solid #d8a45c;
+      background: #d8a45c;
+      color: #0a1017;
       font-weight: 700;
       font-size: 14px;
       text-decoration: none;
@@ -181,17 +187,17 @@
     }
 
     .button:hover {
-      background: var(--mint);
+      background: #e7b978;
     }
 
     .button.secondary {
       background: transparent;
-      border-color: rgb(164 217 206 / 0.55);
-      color: var(--paper);
+      border-color: rgb(216 164 92 / 0.55);
+      color: var(--ink);
     }
 
     .button.secondary:hover {
-      background: rgb(164 217 206 / 0.14);
+      background: rgb(216 164 92 / 0.14);
     }
 
     main {
@@ -245,11 +251,12 @@
 
     .pill-list li {
       padding: 6px 11px;
-      background: var(--mint);
-      border: 1px solid #c7d9d2;
+      background: #182534;
+      border: 1px solid rgb(54 196 188 / 0.32);
       border-radius: 999px;
       font-size: 0.85rem;
       font-weight: 600;
+      color: var(--ink);
     }
 
     .job {
@@ -276,8 +283,8 @@
     }
 
     .callout {
-      background: var(--mint);
-      border-left: 4px solid var(--teal);
+      background: #14262c;
+      border-left: 4px solid #d8a45c;
       padding: 18px 22px;
     }
 
@@ -299,8 +306,10 @@
       inset-inline-end: 18px;
       z-index: 45;
       width: min(calc(100vw - 36px), 410px);
-      border: 1px solid var(--mint-ink);
-      box-shadow: 8px 8px 0 var(--orange);
+      background: #0f1823;
+      color: #f1ebe0;
+      border: 1px solid #d8a45c;
+      box-shadow: 8px 8px 0 rgb(54 196 188 / 0.3);
       padding: 12px 14px;
       display: flex;
       align-items: center;
@@ -355,9 +364,9 @@
       min-inline-size: 36px;
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgb(164 217 206 / 0.35);
+      border: 1px solid rgb(216 164 92 / 0.35);
       background: rgb(255 255 255 / 0.06);
-      color: var(--paper);
+      color: #f1ebe0;
       font-family: "DM Mono", monospace;
       font-size: 11px;
       text-decoration: none;
@@ -365,8 +374,9 @@
     }
 
     .mini-btn:hover {
-      background: var(--orange);
-      border-color: var(--orange);
+      background: #d8a45c;
+      border-color: #d8a45c;
+      color: #0a1017;
     }
 
     @media (max-width: 740px) {
@@ -378,17 +388,28 @@
     @media print {
       body {
         background: #fff;
+        color: #000;
       }
       .dark-top {
-        background: #fff;
-        color: #000;
+        background: #fff !important;
+        color: #000 !important;
         border-bottom: 2px solid #000;
       }
       .subhead,
       .meta-line,
       .eyebrow,
-      .meta-line a {
-        color: #111;
+      .meta-line a,
+      .job-meta,
+      a {
+        color: #111 !important;
+      }
+      .card,
+      .job,
+      .callout,
+      .pill-list li {
+        background: #fff !important;
+        color: #000 !important;
+        border-color: #ccc !important;
       }
       .nav,
       .actions,

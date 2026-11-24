@@ -21,29 +21,8 @@ body {
   color: var(--ink);
 }
 
-.mockup-ribbon {
-  background: #161f2c;
-  color: var(--ink);
-  border-bottom: 1px solid rgb(216 164 92 / 0.4);
-  padding: 10px 28px;
-  font-family: "DM Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.mockup-ribbon a {
-  color: #d8a45c;
-  font-weight: 700;
-}
-
 .site-header {
-  background: rgb(10 16 23 / 0.9);
+  background: rgb(10 16 23 / 0.92);
   border-bottom: 1px solid rgb(216 164 92 / 0.25);
 }
 
@@ -105,13 +84,15 @@ h2 {
   background: rgb(216 164 92 / 0.14);
 }
 
-.button.primary {
+.button.primary,
+.button.coral {
   background: #d8a45c;
   border-color: #d8a45c;
   color: #0a1017;
 }
 
-.button.primary:hover {
+.button.primary:hover,
+.button.coral:hover {
   background: #e7b978;
 }
 
@@ -121,10 +102,8 @@ h2 {
   color: #effaf8;
 }
 
-.button.coral {
-  background: #b97c36;
-  border-color: #d8a45c;
-  color: #fff;
+.button.accent:hover {
+  background: #23837e;
 }
 
 .dark-surface {
@@ -141,10 +120,7 @@ h2 {
   color: #f1ebe0;
 }
 
-.hero-card .mono {
-  color: #d8a45c;
-}
-
+.hero-card .mono,
 .hero-card .number {
   color: #d8a45c;
 }
@@ -155,6 +131,15 @@ h2 {
 
 .hero-card p {
   color: #c2ced8;
+}
+
+.hero-card-btn {
+  border-color: rgb(216 164 92 / 0.45);
+  color: #d8a45c;
+}
+
+.hero-card-btn:hover {
+  background: rgb(216 164 92 / 0.15);
 }
 
 .profile-photo {
@@ -185,6 +170,15 @@ h2 {
 
 .showcase-card:hover {
   box-shadow: 8px 8px 0 #d8a45c;
+}
+
+.yt-channel-card:hover {
+  box-shadow: 6px 6px 0 #36c4bc;
+}
+
+.yt-play-pill {
+  background: #d8a45c;
+  color: #0a1017;
 }
 
 .showcase-btn {
@@ -236,6 +230,12 @@ h2 {
   background: #e9bb7a;
 }
 
+.ost-btn[aria-pressed="true"] {
+  background: #1d706c;
+  border-color: #36c4bc;
+  color: #fff;
+}
+
 .ost-track-trigger {
   color: #f1ebe0;
 }
@@ -259,10 +259,19 @@ h2 {
   border-color: rgb(216 164 92 / 0.45);
 }
 
+.ost-dl-link {
+  border-color: rgb(216 164 92 / 0.35);
+  color: #d8a45c;
+}
+
 .quote {
   background: linear-gradient(135deg, #132c33 0%, #0f1b26 100%);
   border: 1px solid rgb(216 164 92 / 0.4);
   color: #f4efe4;
+}
+
+.quote .mono {
+  color: #d8a45c;
 }
 
 .mini-player {
@@ -272,6 +281,14 @@ h2 {
   box-shadow: 8px 8px 0 rgb(54 196 188 / 0.3);
 }
 
+.mini-meta .mono {
+  color: #36c4bc;
+}
+
+.mini-player.is-playing .mini-meta .mono {
+  color: #d8a45c;
+}
+
 .mini-meta strong {
   color: #f7f1e6;
 }
@@ -279,6 +296,12 @@ h2 {
 .mini-btn {
   color: #f1ebe0;
   border-color: rgb(216 164 92 / 0.35);
+}
+
+.mini-btn:hover {
+  background: #d8a45c;
+  border-color: #d8a45c;
+  color: #0a1017;
 }
 
 dialog.portfolio-dialog {
@@ -316,6 +339,18 @@ dialog.portfolio-dialog {
   color: #f1ebe0;
 }
 
+.resume-subhead {
+  color: #dce6ee;
+}
+
+.resume-meta {
+  color: #a9b8c4;
+}
+
+.resume-meta a {
+  color: #d8a45c;
+}
+
 .resume-banner .button.primary {
   background: #d8a45c;
   border-color: #d8a45c;
@@ -341,4 +376,12 @@ dialog.portfolio-dialog {
 .resume-callout {
   background: #14262c;
   border-left-color: #d8a45c;
+}
+
+.timeline {
+  border-top-color: rgb(216 164 92 / 0.45);
+}
+
+footer a {
+  color: #d8a45c;
 }
